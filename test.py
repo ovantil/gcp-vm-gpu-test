@@ -25,10 +25,11 @@ base_image_paths = [
     for img_name in os.listdir(base_image_folder)
 ]
 
+BATCH_SIZE = 512
 
-def load_and_preprocess_images(image_paths, batch_size=512):
-    for i in range(0, len(image_paths), batch_size):
-        batch_paths = image_paths[i : i + batch_size]
+def load_and_preprocess_images(image_paths):
+    for i in range(0, len(image_paths), BATCH_SIZE):
+        batch_paths = image_paths[i : i + BATCH_SIZE]
         imgs = [
             cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)
             for img_path in batch_paths
