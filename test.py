@@ -26,7 +26,7 @@ base_image_paths = [
 ]
 
 
-def load_and_preprocess_images(image_paths, batch_size=256):
+def load_and_preprocess_images(image_paths, batch_size=512):
     for i in range(0, len(image_paths), batch_size):
         batch_paths = image_paths[i : i + batch_size]
         imgs = [
@@ -39,6 +39,8 @@ def load_and_preprocess_images(image_paths, batch_size=256):
 
 
 def encode_images(image_paths):
+    rprint(f"-> Encoding {len(image_paths)} images...")
+    start_time = time.time()
     if not isinstance(image_paths, list):
         image_paths = [
             os.path.join(base_image_folder, img_name)
@@ -50,6 +52,8 @@ def encode_images(image_paths):
         with torch.no_grad():
             batch_encoded_imgs = model.encode_image(batch_imgs)
             encoded_images.append(batch_encoded_imgs)
+    
+    rprint(f"-> Encoded {len(image_paths)} images in {time.time() - start_time:.2f} seconds")
     return torch.cat(encoded_images)
 
 
