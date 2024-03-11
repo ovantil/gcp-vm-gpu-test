@@ -25,7 +25,7 @@ base_image_paths = [
     for img_name in os.listdir(base_image_folder)
 ]
 
-BATCH_SIZE = 256
+BATCH_SIZE = 512
 
 def load_and_preprocess_images(image_paths):
     for i in range(0, len(image_paths), BATCH_SIZE):
