@@ -25,7 +25,7 @@ base_image_paths = [
     for img_name in os.listdir(base_image_folder)
 ]
 
-BATCH_SIZE = 512
+BATCH_SIZE = 64
 
 def load_and_preprocess_images(image_paths):
     for i in range(0, len(image_paths), BATCH_SIZE):
@@ -54,7 +54,7 @@ def encode_images(image_paths):
             batch_encoded_imgs = model.encode_image(batch_imgs)
             encoded_images.append(batch_encoded_imgs)
     
-    rprint(f"-> Encoded {len(image_paths)} images in {time.time() - start_time:.2f} seconds")
+        rprint(f"-> Encoded {len(batch_imgs)} images in {time.time() - start_time:.2f} seconds")
     return torch.cat(encoded_images)
 
 
