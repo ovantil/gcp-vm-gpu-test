@@ -65,6 +65,11 @@ item_image_folders = os.listdir(item_image_folders_path)
 image_paths = []
 for folder in item_image_folders:
     folder_path = os.path.join(item_image_folders_path, folder)
+    
+    # ensure folder is a directory
+    if not os.path.isdir(folder_path):
+        continue
+    
     image_paths.extend(
         [os.path.join(folder_path, img) for img in os.listdir(folder_path)]
     )
